@@ -1,38 +1,157 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --background-color: #1c2636;
+  --text-color: #ededed;
+  --focus-color: #77a1e4;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 5%;
+  background: transparent;
   display: flex;
-  flex-direction: column;
+  justify-content: right;
+  align-items: center;
+  z-index: 100;
+}
+
+.navbar ul {
+  margin: 20px;
+  list-style-type: none;
+  display: flex; /* 부모 요소에 적용하면 자식 요소들이 자동으로 정렬됨, 가로 방향(왼쪽 → 오른쪽) 정렬*/
+}
+
+.navbar li {
+  position: relative;
+  margin-left: 30px;
+  font-size: 20px;
+}
+
+.navbar a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+/* 가로 높이 */
+.navbar a::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  width: 100%; /* 가로 높이 */
+  height: 2px; /* 세로 높이 */
+  background-color: var(--focus-color);
+  transform: scaleX(0); /* 처음에는 안 보이게 */
+  transition: transform 0.3s ease;
+}
+
+.navbar a:hover {
+  color: var(--focus-color);
+}
+
+.navbar .active {
+  color: var(--focus-color);
+}
+
+.navbar .active::before,
+.navbar a:hover::before {
+  color: var(--focus-color);
+  transform: scaleX(1); /* 마우스를 올리면 밑줄이 커짐 */
+}
+
+.home-img {
+  border-radius: 50%;
+}
+
+.home-img img {
+  position: relative;
+  width: 25vw;
+  border-radius: 50%;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: 0.2s linear;
+}
+
+.hover-img img:hover {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.home {
+  height: 100vh;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 0 10%;
 }
 
-.App-link {
-  color: #61dafb;
+.home-content {
+  background: transparent;
+  margin: 0 50px;
+  max-width: 600px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.home-content h1 {
+  position: relative;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.home-content h1::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background-color);
+  animation: showRight 1s ease forwards;
+  animation-delay: 0.5s;
+}
+
+.home-content h1 span {
+  color: var(--focus-color);
+}
+
+.home-content p {
+  position: relative;
+  font-size: 20px;
+  margin: 40px 0 40px;
+}
+
+.home-content p::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background-color);
+  animation: showRight 1s ease forwards;
+  animation-delay: 1s;
+}
+
+/* KEYFRAMES ANIMATION */
+@keyframes showRight {
+  100% {
+    width: 0;
   }
 }
