@@ -1,6 +1,6 @@
 import myImg from "../myImg.jpg"; // src 폴더 아래 바로 있는 경우
 
-function Section() {
+function Home() {
   return (
     <section className="home">
       <div className="home-img">
@@ -10,7 +10,7 @@ function Section() {
         <h1>
           안녕하세요,
           <div>
-            <span>웹 개발자</span> 오창은입니다.
+            <span>개발자</span> 오창은입니다.
           </div>
         </h1>
         <p>
@@ -22,4 +22,4 @@ function Section() {
   );
 }
 
-export default Section;
+export default Home;

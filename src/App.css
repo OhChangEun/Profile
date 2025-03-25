@@ -4,12 +4,23 @@
   --background-color: #1c2636;
   --text-color: #ededed;
   --focus-color: #77a1e4;
+  --black-color: #171e2a;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Nanum Gothic", "Roboto", sans-serif;
+}
+
+/* 한글 전용 폰트 설정 */
+*:lang(ko) {
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+/* 영어 전용 폰트 설정 */
+*:lang(en) {
   font-family: "Roboto", sans-serif;
 }
 
@@ -23,12 +34,13 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 20px 5%;
-  background: transparent;
+  padding: 5px 5%;
   display: flex;
   justify-content: right;
   align-items: center;
   z-index: 100;
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--black-color);
 }
 
 .navbar ul {
@@ -39,22 +51,21 @@ header {
 
 .navbar li {
   position: relative;
-  margin-left: 30px;
-  font-size: 20px;
+  margin-left: 44px;
 }
 
-.navbar a {
+.navbar div {
   color: var(--text-color);
   text-decoration: none;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: bold;
   transition: 0.3s;
 }
 
-/* 가로 높이 */
-.navbar a::before {
+.navbar div::before {
   content: "";
   position: absolute;
-  bottom: -2px;
+  bottom: -5px;
   width: 100%; /* 가로 높이 */
   height: 2px; /* 세로 높이 */
   background-color: var(--focus-color);
@@ -62,7 +73,8 @@ header {
   transition: transform 0.3s ease;
 }
 
-.navbar a:hover {
+.navbar div:hover {
+  cursor: pointer;
   color: var(--focus-color);
 }
 
@@ -71,7 +83,7 @@ header {
 }
 
 .navbar .active::before,
-.navbar a:hover::before {
+.navbar div:hover::before {
   color: var(--focus-color);
   transform: scaleX(1); /* 마우스를 올리면 밑줄이 커짐 */
 }
@@ -154,4 +166,151 @@ header {
   100% {
     width: 0;
   }
+}
+
+@keyframes fadeInBottom {
+  100% {
+    transform: translateY(0); /* 원래 위치로 올라옴 */
+    opacity: 1; /* 완전히 보이도록 */
+  }
+}
+
+.timeline {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* 넘치는 내용을 숨기기 */
+  white-space: normal; /* 텍스트가 한 줄로 나오지 않고, 자동으로 줄바꿈되도록 설정 */
+}
+
+.timeline ul {
+  display: flex;
+  align-items: center;
+  position: relative;
+  list-style: none;
+}
+
+/* 타임라인 선 */
+.timeline ul::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: var(--focus-color);
+  animation: moveline 5s linear forwards;
+}
+
+@keyframes moveline {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.timeline ul li {
+  position: relative;
+  margin: 0 5px;
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+  opacity: 0;
+  animation: fadeInBottom 1s ease forwards;
+}
+
+.info {
+  min-width: 240px; /* 최소 너비 250px */
+  max-width: 240px;
+  padding: 32px;
+  border: 2px solid var(--focus-color);
+  border-radius: 10px;
+  box-shadow: 0 0 8px var(--focus-color);
+}
+
+/* 각 li 요소가 순차적으로 등장하도록 설정 */
+.timeline ul li:nth-child(1) {
+  animation-delay: 0.4s;
+}
+.timeline ul li:nth-child(2) {
+  animation-delay: 1.1s;
+}
+.timeline ul li:nth-child(3) {
+  animation-delay: 2s;
+}
+.timeline ul li:nth-child(4) {
+  animation-delay: 3s;
+}
+.timeline ul li:nth-child(5) {
+  animation-delay: 4s;
+}
+.timeline ul li:nth-child(6) {
+  animation-delay: 4.5s;
+}
+
+.info:hover {
+  cursor: pointer;
+}
+
+.timeline ul li:nth-child(odd) .info {
+  margin-bottom: 220px;
+  transform: translateY(-10px);
+}
+
+/* 수직선 */
+.timeline ul li:nth-child(odd) .info::after {
+  content: "";
+  display: block;
+  width: 3px;
+  height: 64px;
+  background-color: var(--focus-color);
+  box-shadow: 0 0 25px var(--focus-color);
+  position: absolute;
+  left: 50%;
+  top: 100%;
+}
+
+.timeline ul li:nth-child(even) .info {
+  margin-top: 220px;
+  transform: translateY(10px);
+}
+
+/* 수직선 */
+.timeline ul li:nth-child(even) .info::after {
+  content: "";
+  display: block;
+  width: 3px;
+  height: 50px;
+  background-color: var(--focus-color);
+  box-shadow: 0 0 25px var(--focus-color);
+  position: absolute;
+  left: 50%;
+  top: -50px;
+  z-index: 100;
+}
+
+time {
+  display: block;
+  color: var(--text-color);
+  margin-bottom: 12px;
+  font-size: 24px;
+  color: var(--focus-color);
+}
+
+/* 원 요소 */
+.timeline ul li::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  background: var(--focus-color);
+  border: 3px solid var(--focus-color);
+  border-radius: 50%;
+  box-shadow: 0 0 25px var(--focus-color);
+  z-index: 1;
 }
