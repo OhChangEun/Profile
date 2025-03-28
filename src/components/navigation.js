@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 
-function Navigation({ sectionRef, timelineRef }) {
+function Navigation({ homeRef, profileRef, projectRef, learningRef }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const sections = [homeRef, profileRef, projectRef, learningRef];
 
   const scrollToSection = (ref) => {
     if (ref.current) {
@@ -14,6 +15,27 @@ function Navigation({ sectionRef, timelineRef }) {
     setActiveIndex(num);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+
+      let currentIndex = 0;
+      sections.forEach((ref, index) => {
+        if (ref.current) {
+          const { offsetTop, clientHeight } = ref.current;
+          if (scrollPosition >= offsetTop - clientHeight / 2) {
+            currentIndex = index;
+          }
+        }
+      });
+
+      setActiveIndex(currentIndex);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <header>
       <nav className="navbar">
@@ -21,7 +43,7 @@ function Navigation({ sectionRef, timelineRef }) {
           <li>
             <div
               className={activeIndex === 0 ? "active" : null}
-              onClick={() => onClick({ ref: sectionRef, num: 0 })}
+              onClick={() => onClick({ ref: homeRef, num: 0 })}
             >
               Home
             </div>
@@ -29,7 +51,7 @@ function Navigation({ sectionRef, timelineRef }) {
           <li>
             <div
               className={activeIndex === 1 ? "active" : null}
-              onClick={() => onClick({ ref: timelineRef, num: 1 })}
+              onClick={() => onClick({ ref: profileRef, num: 1 })}
             >
               Profile
             </div>
@@ -37,15 +59,15 @@ function Navigation({ sectionRef, timelineRef }) {
           <li>
             <div
               className={activeIndex === 2 ? "active" : null}
-              onClick={() => onClick({ ref: sectionRef, num: 2 })}
+              onClick={() => onClick({ ref: projectRef, num: 2 })}
             >
-              Projets
+              Projects
             </div>
           </li>
           <li>
             <div
               className={activeIndex === 3 ? "active" : null}
-              onClick={() => onClick({ ref: timelineRef, num: 3 })}
+              onClick={() => onClick({ ref: learningRef, num: 3 })}
             >
               Learning & Growth
             </div>

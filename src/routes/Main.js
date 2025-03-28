@@ -1,20 +1,35 @@
 import { useRef } from "react";
-import Navigation from "../components/navigation";
+import Navigation from "../components/Navigation.js";
 import Home from "../components/Home";
 import Profile from "../components/timeline";
+import Projects from "../components/Projects.js";
+import Learning from "../components/Learning.js";
 
 function Main() {
-  const sectionRef = useRef(null);
-  const timelineRef = useRef(null);
+  const homeRef = useRef(null);
+  const profileRef = useRef(null);
+  const projectRef = useRef(null);
+  const learningRef = useRef(null);
 
   return (
     <>
-      <Navigation sectionRef={sectionRef} timelineRef={timelineRef} />
-      <div ref={sectionRef}>
+      <Navigation
+        homeRef={homeRef}
+        profileRef={profileRef}
+        projectRef={projectRef}
+        learningRef={learningRef}
+      />
+      <div ref={homeRef}>
         <Home />
       </div>
-      <div ref={timelineRef}>
+      <div ref={profileRef}>
         <Profile />
+      </div>
+      <div ref={projectRef}>
+        <Projects />
+      </div>
+      <div ref={learningRef}>
+        <Learning />
       </div>
     </>
   );

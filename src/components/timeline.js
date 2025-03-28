@@ -4,8 +4,7 @@ function Profile() {
       <ul>
         <li>
           <div className="info">
-            <time>19.03</time>
-            <span>계명대학교 입학</span>
+            <time>19.03</time>계명대학교 입학
           </div>
         </li>
         <li>
